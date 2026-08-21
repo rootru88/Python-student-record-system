@@ -1,0 +1,136 @@
+def add(stu):
+    x=int(input("How many students do you want to enter today:"))
+    count=0
+    while x!=count:
+        serial=input("Enter student's id:")
+        name=input("Enter student's name:")
+        while True:
+            marks = int(input("Enter his/her total marks and they should be under 1200:"))
+            if 0<marks<=1200:
+                break
+            else:
+                print("Invalid marks!!")
+        stu[serial]=name,marks
+        count+=1
+def delete(stu):
+    x=input("Enter id of a student you want to delete record for:")
+    if x in stu:
+        del stu[x]
+    else:
+        print("Student not found!!")
+def ch(stu):
+    x=input("Enter id of student you want to update marks of:")
+    if x in stu:
+        name=stu[x][0]
+        while True:
+            marks = int(input("Enter his/her total marks and they should be under 1200:"))
+            if 0<marks<=1200:
+                break
+            else:
+                print("Invalid marks!!")
+        stu[x]=name,marks
+    else:
+        print("Id not found!!")
+def search(stu):
+    x=input("enter id of the student:")
+    if x in stu:
+        print(stu[x])
+    else:
+        print("Id not found!!")
+def high(stu):
+    mark = []
+    for i in stu.values():
+        mark.append(i[1])
+    print(max(mark))
+def low(stu):
+    mark = []
+    for i in stu.values():
+        mark.append(i[1])
+    print(min(mark))
+def ave(stu):
+    mark=[]
+    for i in stu.values():
+        mark.append(i[1])
+    print(sum(mark)/len(mark))
+def dis(stu):
+    # mark=[]
+    for i in stu.values():
+        if i[1]<=1200 and i[1]>=1000:
+            print(f"{i[0]}'s grade is A")
+        elif i[1]>=800 and i[1]<1000:
+            print(f"{i[0]}'s grade is B")
+        elif i[1]>=700 and i[1]<800:
+            print(f"{i[0]}'s grade is C")
+        elif i[1]>=500 and i[1]<700:
+            print(f"{i[0]}'s grade is D")
+        else:
+            print(f"{i[0]} has been failed!!")
+
+    # for i in mark:
+    #     if i<=1200 and i>=1000:
+    #         print("A")
+    #     elif i>=800 and i<1000:
+    #         print("B")
+    #     elif i>=700 and i<800:
+    #         print("C")
+    #     elif i>501 and i<700:
+    #         print("D")
+    #     else:
+    #         print("Fail")
+def top(stu):
+    high=[]
+    for i in stu.values():
+        high.append(i[1])
+    high.sort(reverse=True)
+    x=[]
+    for i in range(3):
+        x.append(high[i])
+    print("Top 3 scores are")
+    for i in x:
+        print(f"{i}\n")
+
+
+
+stu={}
+while True:
+    x=int(input("Press 1 to add\nPress 2 to search\nPress 3 to delete\nPress 4 to update marks\nPress 5 to display all students\nPress 6 to show highest marks\nPress 7 to show lowest marks\nPress 8 to show average marks\nPress 9 to show grade distribution\nPress 10 to show top 3 students\nPress 11 to exit"))
+    if x==1:
+        add(stu)
+    elif x==2:
+        search(stu)
+    elif x==3:
+        delete(stu)
+    elif x==4:
+        ch(stu)
+    elif x==5:
+        for i in stu:
+            print(i,stu[i])
+    elif x==6:
+        if not stu:
+            print("No records found!!")
+        else:
+            high(stu)
+    elif x==7:
+        if not stu:
+            print("No records found!!")
+        else:
+            low(stu)
+    elif x==8:
+        if not stu:
+            print("No records found!!")
+        else:
+            ave(stu)
+    elif x==9:
+        if not stu:
+            print("No records found!!")
+        else:
+            dis(stu)
+    elif x==10:
+        if not stu:
+            print("No records found!!")
+        elif len(stu)<3:
+            print("You need atleast 3 students!! ")
+        else:
+            top(stu)
+    elif x==11:
+        break
